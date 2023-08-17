@@ -21,9 +21,10 @@ jobs:
 
       - name: Build and Publish to Maven Central
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
            mvn verify -e -B -V -DdistributionFileName=mutils
+           mvn deploy -Dregistry=https://maven.pkg.github.com/mibaltoalex -Dtoken=$GH_TOKEN
            
       - name: Upload built Maven
         uses: actions/upload-artifact@v3
